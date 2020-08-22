@@ -475,3 +475,5 @@ comparable_methods = "
 methods_groups = [array_methods, string_methods, hash_methods, integer_methods, enumerable_methods, comparable_methods]
 
 p sum = methods_groups.reduce(0) { |sum, method_group| sum + method_group.length}
+
+p sum / 15
