@@ -27,12 +27,8 @@ turn string into array
 
 def simplify_directions(directions)
 	directions_string = directions.join
-	(directions.length / 2).times do
-		directions_string.gsub!(/(NORTHSOUTH)|(EASTWEST)|(SOUTHNORTH)|(WESTEAST)/, "")
-	end
-	 directions = directions_string.split(/(NORTH)|(SOUTH)|(EAST)|(WEST)/)
-	 directions.delete("")
-	 directions
+	(directions.length / 2).times { directions_string.gsub!(/(NORTHSOUTH)|(EASTWEST)|(SOUTHNORTH)|(WESTEAST)/, "") }
+	directions_string.split(/(NORTH)|(SOUTH)|(EAST)|(WEST)/).delete_if {|string| string == "" }
 end
 
 p simplify_directions(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"])
