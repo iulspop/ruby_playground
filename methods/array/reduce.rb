@@ -4,4 +4,5 @@ sum = numbers.reduce(:+)
 
 numbers = [123, 1233, 4355, 656]
 
-p numbers.map { |num| num / 2}.reduce(:+)
+p numbers.map { |num| num / 2 }.reduce(:+)
+p numbers.reduce(0) { |sum, num| sum + (num / 2)}
