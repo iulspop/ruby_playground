@@ -62,16 +62,15 @@ def rot13(string)
 end
 
 def shift_letter(char)
-  if char.upcase == char then upcase = true end
+  if char.upcase == char then alphabet = [*("A".."Z")]
+  else alphabet = [*("a".."z")] end
   
-  alphabet = [*("a".."z")]
-  index = alphabet.index(char.downcase)
+  index = alphabet.index(char)
   13.times do
     index += 1
     index = 0 if index == alphabet.length
   end
 
-  return alphabet[index].upcase if upcase
   alphabet[index]
 end
 
