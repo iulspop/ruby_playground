@@ -56,21 +56,23 @@ def rot13(string)
   chars = string.chars
   encrypted = chars.map do |char|
     if !char.match?(/[a-z]/i) then char
-    elsif char.match?(/[A-Z]/) then shift_letter(char).upcase
-    else
-      shift_letter(char)
-    end
+    else shift_letter(char) end
   end
   encrypted.join
 end
 
 def shift_letter(char)
-  char.downcase!
+  if char.upcase == char then upcase = true end
+  
   alphabet = [*("a".."z")]
-  index = alphabet.index(char)
+  index = alphabet.index(char.downcase)
   13.times do
     index += 1
     index = 0 if index == alphabet.length
   end
+
+  return alphabet[index].upcase if upcase
   alphabet[index]
 end
+
+p rot13("abc")
