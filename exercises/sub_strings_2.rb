@@ -45,24 +45,33 @@ output: integer
 substrings go to array
 
 ===== ALOGRITHM =====
-1. initialize local variable `length` equal to length of string
-2. initialize local variable `substrings` as empty array
-3. loop while length >= 1
-   1. initialize local variable `index` equal to 0 (int)
-   2. loop
-      1. from string, slice a substring of length = length, starting from index
-      2. push it substrings array
-      3. increment index + 1
-      4. break if (length of string - length - index < 0)
-   3. decrement length - 1
-4. convert all substrings to integers
-5. filter array to only odd numbers
-6. return array count
+1. Create variable `length` equal to length of string
+2. Create an empty array called `substrings`
+3. While length >= 1
+   1. Create variable `index` equal to 0
+   2. Loop
+      1. Create variable `substring` equal to
+         1. slice of `string`, starting from `index` and
+            equal in length to `length`
+      2. Append the `substring` to `substrings`.
+      3. Increment `index` + 1
+      4. Break loop if (length of string - `length` - `index` < 0)
+   3. Decrement `length` - 1
+4. Create variable `odd_numbers` equal to
+   1. Map over `substrings` with their integer values
+   2. Filter `substrings` elements to only odd numbers
+6. Return `odd_numbers` element count
 =end
 
 # ===== IMPLEMENTATION ====
 
 def solve(string)
+  substrings = get_substrings(string)
+  odd_numbers = substrings.map(&:to_i).filter { |num| num.odd? }
+  odd_numbers.count
+end
+
+def get_substrings(string)
   length = string.length
   substrings = []
   while length >= 1
@@ -75,7 +84,7 @@ def solve(string)
     end
     length -= 1
   end
-  substrings.map(&:to_i).filter { |num| num.odd? }.count
+  substrings
 end
 
 p solve("1341") == 7
