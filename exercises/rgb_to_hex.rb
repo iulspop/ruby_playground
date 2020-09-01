@@ -54,10 +54,9 @@ ALGORITHM:
 
 # IMPLMENTATION
 
-def rgb(*decimal_values)
-  hex_values = decimal_values.map { |decimal| decimal.clamp(0, 255).to_s(16).upcase }
-  hex_values.map! { |hex| if hex.length == 1 then "0" + hex else hex end }
-  hex_values.join
+def rgb(r, g, b)
+  hex_strings = [r, g, b].map { |decimal| decimal.clamp(0, 255).to_s(16).upcase }
+  hex_string = hex_strings.map { |hex| if hex.length < 2 then "0" + hex else hex end }.join
 end
 
 
