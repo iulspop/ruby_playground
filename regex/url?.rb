@@ -1,5 +1,5 @@
 def url?(string)
-  /^https?:\/\/[a-z]+\.[a-z]+$/.match?(string)
+  /\Ahttps?:\/\/\S+\z/.match?(string)
 end
 
 p url?('http://launchschool.com')   # -> true
