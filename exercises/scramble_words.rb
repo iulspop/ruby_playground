@@ -73,8 +73,7 @@ def scramble_words(sentence)
   scrambled_words = split_words.map do |(_, first, center, last)|
     next first if center.nil?
     next first + center if last.nil?
-    center = sort_letters(center)
-    first + center + last
+    first + sort_letters(center) + last
   end
 
   scrambled_words.join(" ")
