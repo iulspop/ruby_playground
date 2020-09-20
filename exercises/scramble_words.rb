@@ -60,7 +60,8 @@ def letter?(char)
   char.match? /[a-z]/
 end
 
-def sort_letters(chars)
+def sort_letters(string)
+  chars = string.chars
   sorted_letters = chars.select { |char| letter?(char) }.sort
   chars.map {|char| letter?(char) ? sorted_letters.shift : char }.join
 end
@@ -72,7 +73,7 @@ def scramble_words(sentence)
   scrambled_words = split_words.map do |(_, first, center, last)|
     next first if center.nil?
     next first + center if last.nil?
-    center = sort_letters(center.chars)
+    center = sort_letters(center)
     first + center + last
   end
 
