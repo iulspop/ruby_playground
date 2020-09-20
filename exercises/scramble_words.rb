@@ -25,6 +25,8 @@ special charachters remain in place
 no caps input??
 
 algo:
+Algo not valid anymore after refactoring!
+
 given a string `sentence`
 1. split `sentence` into array of strings `words`
 2. split `words` into `split_words`
@@ -45,7 +47,8 @@ given a string `sentence`
    8. assign center element of `split_word` to joined `center_chars`
    9. join `split_word`
 4. join `scramble_words`
-  
+
+Algo not valid anymore after refactoring!
 =end
 
 def split_extremities(words)
