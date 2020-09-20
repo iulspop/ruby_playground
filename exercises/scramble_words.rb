@@ -48,45 +48,31 @@ given a string `sentence`
   
 =end
 
-def get_special_char_positions(chars)
-  special_chars = {}
-  chars.each_with_index do |char, index|
-    special_chars[index] = char if char.match?(/[-',.]/)
-  end
-  special_chars
+def split_extremities(words)
+  split_extremities = /(\A[-',.]*[a-z]{1})|([a-z]{1}[-',.]*\z)/
+  words.map { |word| word.split(split_extremities) }
 end
 
-def delete_special_chars!(special_chars, chars)
-  deleted = 0
-  special_chars.each do |index, _|
-    chars.delete_at(index - deleted)
-    deleted += 1
-  end
+def letter?(char)
+  char.match? /[a-z]/
 end
 
-def place_back_special_chars!(special_chars, chars)
-  special_chars.each do |index, special_char|
-    chars.insert(index, special_char)
-  end
+def sort_chars(chars)
+  scrambled_letters = chars.select { |char| letter?(char) }.sort
+  chars.map {|char| letter?(char) ? scrambled_letters.shift : char }.join
 end
 
 def scramble_words(sentence)
-  split_extremities = /(\A[-',.]*[a-z]{1})|([a-z]{1}[-',.]*\z)/
   words = sentence.split
-  split_words = words.map { |word| word.split(split_extremities) }
+  split_words = split_extremities(words)
 
-  scrambled_words = split_words.map do |split_word|
-    next split_word.join if split_word.size <= 2
-    center_chars = split_word[2].chars
-    special_chars = get_special_char_positions(center_chars)
-
-    delete_special_chars!(special_chars, center_chars)
-    center_chars.sort!
-    place_back_special_chars!(special_chars, center_chars)
-
-    split_word[2] = center_chars
-    split_word.join
+  scrambled_words = split_words.map do |(empty, first, center, last)|
+    next first if center.nil?
+    next first + last if last.nil?
+    center = sort_chars(center.chars)
+    first + center + last
   end
+
   scrambled_words.join(" ")
 end
 
