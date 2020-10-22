@@ -1,0 +1,6 @@
+On line X, the `puts` method call with local variable `X` passed in as an argument outputs `’X’`, because
+1)
+
+Local variables initialized in the outer scope are available in the inner scope created by a method invocation followed by a block.
+
+Local variables initialized in the inner scope created by a method invocation followed by a block are not available in the outer scope.
